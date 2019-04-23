@@ -139,8 +139,7 @@ function teenyRequest(
               const header = res.headers.get('content-type');
               const response = fetchToRequestResponse(reqOpts, res);
               const body = response.body;
-              if (header === 'application/json' ||
-                  header === 'application/json; charset=utf-8') {
+              if (header && (header === 'application/json' || header.toLowerCase() === 'application/json; charset=utf-8')) {
                 res.json().then(
                     json => {
                       response.body = json;
@@ -212,8 +211,7 @@ function teenyRequest(
             const header = res.headers.get('content-type');
             const response = fetchToRequestResponse(reqOpts, res);
             const body = response.body;
-            if (header === 'application/json' ||
-                header === 'application/json; charset=utf-8') {
+            if (header && (header === 'application/json' || header.toLowerCase() === 'application/json; charset=utf-8')) {
               if (response.statusCode === 204) {
                 // Probably a DELETE
                 callback(null, response, body);
